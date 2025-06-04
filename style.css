@@ -64,62 +64,63 @@ strong {
     min-height: 100vh;
     background-image: linear-gradient(to bottom, var(--gradient-green-top), var(--gradient-green-bottom));
     display: flex;
-    flex-direction: column; /* Ensures items stack vertically */
-    align-items: center; /* Horizontally center content */
-    justify-content: center; /* Vertically center content */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     color: var(--text-light);
-    padding: 20px;
-    overflow: hidden; /* To contain the vertical text and prevent scrollbars from it */
-    position: relative; /* Needed for absolute positioning of some elements */
+    padding: 40px 20px; /* Added a bit more top/bottom padding to give space for larger wavy lines */
+    overflow: hidden;
+    position: relative;
 }
 
-.hero-content h1 { /* Container for the two lines of text */
+.hero-content h1 {
     font-weight: 900;
-    line-height: 1.1;
-    margin-bottom: 40px; /* Increased space below the title block */
-    position: relative; /* For the star's positioning if needed */
+    line-height: 1.0; /* Tighter line height for a more compact look if lines are very close */
+    margin-bottom: 50px; /* More space below the title block */
+    position: relative;
 }
 
 .hero-title-line1 {
-    display: block; /* Make it a block to ensure it's on its own line */
-    font-size: clamp(1.8rem, 4vw, 2.8rem); /* Smaller font size */
-    margin-bottom: 5px; /* Small space between lines */
+    display: block;
+    font-size: clamp(2rem, 5vw, 3.5rem); /* Increased base and max size a bit */
+    margin-bottom: 0px; /* Even less space, AUTOMATICO will be very close */
+    font-weight: 700; /* Slightly less bold than AUTOMATICO if desired, or keep 900 */
 }
 
 .hero-title-line2 {
-    display: block; /* Make it a block */
-    font-size: clamp(3.5rem, 8vw, 6.5rem); /* Much bigger font size */
-    display: flex; /* To align text and star nicely */
-    align-items: center; /* Vertically align text and star */
-    justify-content: center; /* Horizontally center text and star */
+    display: block;
+    font-size: clamp(5rem, 12vw, 9rem); /* MUCH BIGGER - increased all values significantly */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1; /* Ensure the line height doesn't add too much space */
 }
 
 .hero-star {
-    width: clamp(30px, 7vw, 60px); /* Proportionally larger star */
-    height: auto; /* Maintain aspect ratio */
-    margin-left: 10px; /* Space between AUTOMÁTICO and star */
+    width: clamp(45px, 11vw, 85px); /* Made star proportionally MUCH BIGGER */
+    height: auto;
+    margin-left: 15px; /* Slightly more space for the bigger star */
 }
 
 .hero-logo-precin {
-    max-width: clamp(220px, 35vw, 350px); /* Adjusted size */
-    margin-bottom: 35px; /* Space below logo */
-    display: block; /* Ensure it's a block for margin auto to work if needed */
-    margin-left: auto; /* Center if parent isn't flex centering */
-    margin-right: auto; /* Center if parent isn't flex centering */
+    max-width: clamp(240px, 38vw, 380px); /* Slightly larger logo */
+    margin-bottom: 40px; /* More space below logo */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .btn-hero {
     background-color: var(--text-light);
     color: var(--primary-green);
-    padding: 14px 40px; /* Slightly larger button */
+    padding: 15px 45px; /* Adjusted padding */
     border-radius: 50px;
     text-decoration: none;
     font-weight: 700;
-    font-size: clamp(1rem, 2.2vw, 1.2rem);
+    font-size: clamp(1rem, 2.2vw, 1.3rem); /* Slightly larger button text */
     transition: all 0.3s ease;
     display: inline-block;
-    /* margin-top: 0; /* Resetting margin-top if any was there */
 }
 .btn-hero:hover {
     background-color: #f0f0f0;
@@ -128,36 +129,39 @@ strong {
 
 .hero-wavy-line {
     position: absolute;
-    bottom: 0;
+    bottom: -30px; /* Pulling it UP a bit by using a negative bottom value. Adjust this! */
     left: 0;
-    width: 100%; /* Make it span the full width */
-    height: auto;
-    max-height: 250px; /* Increased max-height */
-    object-fit: cover; /* This might still crop if aspect ratio doesn't match 100% width and max-height */
-    /* To prevent cropping and ensure it scales, consider using it as a background or ensuring the SVG/PNG itself is designed to stretch */
-    /* For now, 'cover' will fill, 'contain' would ensure it's all visible but might leave gaps */
+    width: 100%;
+    height: auto; /* Let height be determined by image aspect ratio and width */
+    /* max-height: 300px; */ /* Removing max-height to see if it uncrops, but be careful it doesn't get TOO big */
+    object-fit: contain; /* TRY THIS: 'contain' will ensure the whole image is visible within its box.
+                           It will scale down to fit if necessary, or fill if it can.
+                           If 'contain' still crops, it means the image itself is being cut off by its container's bounds
+                           or the image file dimensions are problematic. */
     z-index: 0;
+    pointer-events: none; /* So it doesn't interfere with clicks if it overlaps content */
 }
 
 .hero-logo-clubpetro {
     position: absolute;
-    bottom: 25px; /* Adjusted */
-    right: 25px; /* Adjusted */
-    max-width: clamp(90px, 13vw, 140px);
+    bottom: 20px;
+    right: 20px;
+    max-width: clamp(80px, 12vw, 130px); /* Slightly smaller to not compete with wavy lines */
     z-index: 1;
 }
 
 .hero-vertical-text {
     position: absolute;
-    right: -60px; /* Pulled more to the border, adjust as needed */
+    right: -90px; /* Pushed MUCH MORE to the right. Adjust this value! -80px, -100px etc. */
     top: 50%;
     transform: translateY(-50%) rotate(90deg);
-    font-size: clamp(6rem, 18vw, 12rem); /* Adjusted size */
+    font-size: clamp(7rem, 20vw, 14rem); /* Made it larger too */
     font-weight: 900;
-    color: rgba(255, 255, 255, 0.06); /* Lighter, more subtle white */
+    color: rgba(255, 255, 255, 0.05); /* Even more subtle */
     z-index: 0;
     white-space: nowrap;
-    letter-spacing: 2px; /* Added some letter spacing */
+    letter-spacing: 3px;
+    pointer-events: none; /* So it doesn't interfere with clicks */
 }
 
 /* --- Split Sections (Slide 2, 3, 4, 10, 11, 14) --- */
