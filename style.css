@@ -70,7 +70,7 @@ strong {
     text-align: center;
     color: var(--text-light);
     padding: 20px;
-    overflow: hidden; /* Crucial to prevent scrollbars from oversized elements */
+    overflow: hidden;
     position: relative;
 }
 
@@ -80,53 +80,50 @@ strong {
     align-items: center;
     justify-content: center;
     position: relative;
-    z-index: 2; /* Content above wavy lines */
-    width: 90%; /* Constrain width slightly to prevent text hitting edges on mobile */
-    max-width: 1200px; /* Max content width on desktop */
+    z-index: 2; /* <<<< CONTENT IS ON TOP */
+    width: 90%;
+    max-width: 1200px;
 }
 
 .hero-content h1 {
     font-weight: 900;
     line-height: 1.0;
-    margin-bottom: 30px;
+    margin-bottom: 35px; /* Adjusted */
     width: 100%;
 }
 
 .hero-title-line1 {
     display: block;
-    font-size: clamp(1.5rem, 4vw, 3rem); /* Adjusted MIN and PREFERRED for mobile */
+    /* SLIGHTLY SMALLER DESKTOP, AND SMALLER MIN FOR MOBILE */
+    font-size: clamp(1.6rem, 4vw, 2.8rem); /* <<<< ADJUSTED */
     margin-bottom: 0px;
     font-weight: 700;
 }
 
 .hero-title-line2 {
     display: block;
-    /* CLAMP ADJUSTMENT:
-       MIN: 3.5rem (Smaller base for mobile)
-       PREFERRED: 10vw (Slightly less aggressive vw for scaling, but still responsive)
-       MAX: 8rem (Keep it big on desktop, but we can adjust this if needed)
-    */
-    font-size: clamp(3.5rem, 10vw, 8rem); /* <<<<<< KEY ADJUSTMENT FOR MOBILE */
+    /* SLIGHTLY SMALLER DESKTOP, AND SMALLER MIN FOR MOBILE */
+    font-size: clamp(3.8rem, 10vw, 7.5rem); /* <<<< ADJUSTED (Max 7.5rem now) */
     display: flex;
     align-items: center;
     justify-content: center;
-    line-height: 0.95; /* Slightly increased for better readability if letters touch */
+    line-height: 0.95;
     text-transform: uppercase;
-    overflow-wrap: break-word; /* Helps prevent overflow if a single word is too long */
-    word-break: break-word; /* More aggressive word breaking */
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .hero-star {
     /* Adjust star size relative to the new title clamp */
-    width: clamp(3rem, 8vw, 7rem); /* <<<<<< ADJUSTED STAR CLAMP */
+    width: clamp(3.2rem, 9vw, 6.5rem); /* <<<< ADJUSTED */
     height: auto;
-    margin-left: clamp(10px, 2vw, 20px); /* Responsive margin for star */
-    flex-shrink: 0; /* Prevent star from shrinking if space is tight */
+    margin-left: clamp(10px, 2vw, 15px); /* Reduced max margin slightly */
+    flex-shrink: 0;
 }
 
 .hero-logo-precin {
-    max-width: clamp(180px, 28vw, 300px); /* Slightly smaller overall */
-    margin-bottom: 30px;
+    max-width: clamp(180px, 28vw, 300px);
+    margin-bottom: 35px; /* Increased space to button */
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -139,10 +136,10 @@ strong {
     border-radius: 50px;
     text-decoration: none;
     font-weight: 700;
-    font-size: clamp(0.9rem, 2vw, 1.2rem); /* Adjusted button text size */
+    font-size: clamp(0.9rem, 2vw, 1.1rem); /* Slightly smaller max button text */
     transition: all 0.3s ease;
     display: inline-block;
-    margin-top: 20px;
+    margin-top: 0; /* Button is directly after logo, space controlled by logo's margin-bottom */
 }
 .btn-hero:hover {
     background-color: #f0f0f0;
@@ -151,13 +148,13 @@ strong {
 
 .hero-wavy-line {
     position: absolute;
-    bottom: -30px; /* Keep this for now, adjust after title is good */
+    bottom: -20px; /* Let's try bringing it down a tiny bit from the previous attempt */
     left: 0;
     width: 100%;
     height: auto;
-    max-height: 35vh; /* Added a max-height relative to viewport height to control its size */
+    max-height: 40vh; /* Can be a bit generous if it's behind content */
     object-fit: contain;
-    z-index: 1; /* BELOW .hero-content (z-index: 2) */
+    z-index: 1; /* <<<< WAVY LINES ARE BEHIND .hero-content (z-index: 2) */
     pointer-events: none;
 }
 
@@ -166,18 +163,18 @@ strong {
     bottom: 20px;
     right: 20px;
     max-width: clamp(70px, 10vw, 120px);
-    z-index: 3;
+    z-index: 3; /* On top of everything in this section */
 }
 
 .hero-vertical-text {
     position: absolute;
-    right: -100px; /* Adjusted this based on your previous feedback. Fine-tune! */
+    right: -100px;
     top: 50%;
     transform: translateY(-50%) rotate(90deg);
-    font-size: clamp(6rem, 18vw, 12rem); /* Adjusted clamp for vertical text */
+    font-size: clamp(6rem, 18vw, 11rem); /* Slightly reduced max for vertical text */
     font-weight: 900;
-    color: rgba(255, 255, 255, 0.04);
-    z-index: 0;
+    color: rgba(255, 255, 255, 0.05);
+    z-index: 0; /* BEHIND EVERYTHING */
     white-space: nowrap;
     letter-spacing: 4px;
     pointer-events: none;
