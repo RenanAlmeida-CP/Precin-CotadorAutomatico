@@ -66,62 +66,67 @@ strong {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* This will help push content, but we can add more space for the button */
+    justify-content: center;
     text-align: center;
     color: var(--text-light);
-    padding: 20px; /* Reduced padding a bit to let content expand */
-    overflow: hidden;
+    padding: 20px;
+    overflow: hidden; /* Crucial to prevent scrollbars from oversized elements */
     position: relative;
 }
 
-.hero-content { /* Added this new class to wrap the text, logo, and button for better control */
+.hero-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: relative; /* For z-index stacking context if needed */
-    z-index: 2; /* Ensure content is above wavy lines */
-    width: 100%; /* Take full width to allow text to be as big as possible */
+    position: relative;
+    z-index: 2; /* Content above wavy lines */
+    width: 90%; /* Constrain width slightly to prevent text hitting edges on mobile */
+    max-width: 1200px; /* Max content width on desktop */
 }
 
 .hero-content h1 {
     font-weight: 900;
     line-height: 1.0;
-    margin-bottom: 30px; /* Adjusted space */
-    width: 100%; /* Allow h1 to take full width for larger text */
+    margin-bottom: 30px;
+    width: 100%;
 }
 
 .hero-title-line1 {
     display: block;
-    /* Let's try fixed REM units first for more predictability, then adjust vw if needed */
-    font-size: 3rem; /* TRY THIS - more fixed size, adjust as needed */
-    /* font-size: clamp(2.5rem, 6vw, 4rem); */ /* Previous attempt */
+    font-size: clamp(1.5rem, 4vw, 3rem); /* Adjusted MIN and PREFERRED for mobile */
     margin-bottom: 0px;
     font-weight: 700;
 }
 
 .hero-title-line2 {
     display: block;
-    /* Let's go BIG with fixed REM and a large VW for scaling */
-    font-size: 8rem; /* TRY THIS - starting big with a fixed unit */
-    /* font-size: clamp(6rem, 15vw, 10rem); */ /* Previous attempt - increased values again */
+    /* CLAMP ADJUSTMENT:
+       MIN: 3.5rem (Smaller base for mobile)
+       PREFERRED: 10vw (Slightly less aggressive vw for scaling, but still responsive)
+       MAX: 8rem (Keep it big on desktop, but we can adjust this if needed)
+    */
+    font-size: clamp(3.5rem, 10vw, 8rem); /* <<<<<< KEY ADJUSTMENT FOR MOBILE */
     display: flex;
     align-items: center;
     justify-content: center;
-    line-height: 0.9; /* Even tighter line height */
-    text-transform: uppercase; /* Just in case, to ensure it looks like the design */
+    line-height: 0.95; /* Slightly increased for better readability if letters touch */
+    text-transform: uppercase;
+    overflow-wrap: break-word; /* Helps prevent overflow if a single word is too long */
+    word-break: break-word; /* More aggressive word breaking */
 }
 
 .hero-star {
-    width: 7.5rem; /* TRY THIS - sizing based on the new title size */
-    /* width: clamp(5rem, 14vw, 9rem); */ /* Previous attempt */
+    /* Adjust star size relative to the new title clamp */
+    width: clamp(3rem, 8vw, 7rem); /* <<<<<< ADJUSTED STAR CLAMP */
     height: auto;
-    margin-left: 20px;
+    margin-left: clamp(10px, 2vw, 20px); /* Responsive margin for star */
+    flex-shrink: 0; /* Prevent star from shrinking if space is tight */
 }
 
 .hero-logo-precin {
-    max-width: clamp(200px, 30vw, 330px); /* Made it a bit smaller as requested */
-    margin-bottom: 30px; /* Space below logo */
+    max-width: clamp(180px, 28vw, 300px); /* Slightly smaller overall */
+    margin-bottom: 30px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -130,14 +135,14 @@ strong {
 .btn-hero {
     background-color: var(--text-light);
     color: var(--primary-green);
-    padding: 15px 45px;
+    padding: 14px 40px;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 700;
-    font-size: clamp(1rem, 2.2vw, 1.3rem);
+    font-size: clamp(0.9rem, 2vw, 1.2rem); /* Adjusted button text size */
     transition: all 0.3s ease;
     display: inline-block;
-    margin-top: 20px; /* ADDED MARGIN-TOP to push it down from the logo */
+    margin-top: 20px;
 }
 .btn-hero:hover {
     background-color: #f0f0f0;
@@ -146,12 +151,13 @@ strong {
 
 .hero-wavy-line {
     position: absolute;
-    bottom: -40px; /* Adjusted if needed */
+    bottom: -30px; /* Keep this for now, adjust after title is good */
     left: 0;
     width: 100%;
     height: auto;
+    max-height: 35vh; /* Added a max-height relative to viewport height to control its size */
     object-fit: contain;
-    z-index: 1; /* <<<<<<< CHANGED TO 1 (below hero-content which is 2) */
+    z-index: 1; /* BELOW .hero-content (z-index: 2) */
     pointer-events: none;
 }
 
@@ -159,22 +165,21 @@ strong {
     position: absolute;
     bottom: 20px;
     right: 20px;
-    max-width: clamp(80px, 12vw, 130px);
-    z-index: 3; /* Ensure it's above wavy lines and content if it overlaps */
+    max-width: clamp(70px, 10vw, 120px);
+    z-index: 3;
 }
 
 .hero-vertical-text {
     position: absolute;
-    right: -110px; /* Pushed EVEN MORE to the right/edge. Original design had it well off screen. */
-    /* If it's too far, try -100px, -95px etc. */
+    right: -100px; /* Adjusted this based on your previous feedback. Fine-tune! */
     top: 50%;
     transform: translateY(-50%) rotate(90deg);
-    font-size: clamp(8rem, 22vw, 15rem); /* Further increased */
+    font-size: clamp(6rem, 18vw, 12rem); /* Adjusted clamp for vertical text */
     font-weight: 900;
-    color: rgba(255, 255, 255, 0.04); /* Even more subtle */
-    z-index: 0; /* Behind everything */
+    color: rgba(255, 255, 255, 0.04);
+    z-index: 0;
     white-space: nowrap;
-    letter-spacing: 4px; /* More spacing */
+    letter-spacing: 4px;
     pointer-events: none;
 }
 
