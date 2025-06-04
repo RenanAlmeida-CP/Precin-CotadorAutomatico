@@ -66,46 +66,62 @@ strong {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* This will help push content, but we can add more space for the button */
     text-align: center;
     color: var(--text-light);
-    padding: 40px 20px; /* Added a bit more top/bottom padding to give space for larger wavy lines */
+    padding: 20px; /* Reduced padding a bit to let content expand */
     overflow: hidden;
     position: relative;
 }
 
+.hero-content { /* Added this new class to wrap the text, logo, and button for better control */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* For z-index stacking context if needed */
+    z-index: 2; /* Ensure content is above wavy lines */
+    width: 100%; /* Take full width to allow text to be as big as possible */
+}
+
 .hero-content h1 {
     font-weight: 900;
-    line-height: 1.0; /* Tighter line height for a more compact look if lines are very close */
-    margin-bottom: 50px; /* More space below the title block */
-    position: relative;
+    line-height: 1.0;
+    margin-bottom: 30px; /* Adjusted space */
+    width: 100%; /* Allow h1 to take full width for larger text */
 }
 
 .hero-title-line1 {
     display: block;
-    font-size: clamp(2rem, 5vw, 3.5rem); /* Increased base and max size a bit */
-    margin-bottom: 0px; /* Even less space, AUTOMATICO will be very close */
-    font-weight: 700; /* Slightly less bold than AUTOMATICO if desired, or keep 900 */
+    /* Let's try fixed REM units first for more predictability, then adjust vw if needed */
+    font-size: 3rem; /* TRY THIS - more fixed size, adjust as needed */
+    /* font-size: clamp(2.5rem, 6vw, 4rem); */ /* Previous attempt */
+    margin-bottom: 0px;
+    font-weight: 700;
 }
 
 .hero-title-line2 {
     display: block;
-    font-size: clamp(5rem, 12vw, 9rem); /* MUCH BIGGER - increased all values significantly */
+    /* Let's go BIG with fixed REM and a large VW for scaling */
+    font-size: 8rem; /* TRY THIS - starting big with a fixed unit */
+    /* font-size: clamp(6rem, 15vw, 10rem); */ /* Previous attempt - increased values again */
     display: flex;
     align-items: center;
     justify-content: center;
-    line-height: 1; /* Ensure the line height doesn't add too much space */
+    line-height: 0.9; /* Even tighter line height */
+    text-transform: uppercase; /* Just in case, to ensure it looks like the design */
 }
 
 .hero-star {
-    width: clamp(45px, 11vw, 85px); /* Made star proportionally MUCH BIGGER */
+    width: 7.5rem; /* TRY THIS - sizing based on the new title size */
+    /* width: clamp(5rem, 14vw, 9rem); */ /* Previous attempt */
     height: auto;
-    margin-left: 15px; /* Slightly more space for the bigger star */
+    margin-left: 20px;
 }
 
 .hero-logo-precin {
-    max-width: clamp(240px, 38vw, 380px); /* Slightly larger logo */
-    margin-bottom: 40px; /* More space below logo */
+    max-width: clamp(200px, 30vw, 330px); /* Made it a bit smaller as requested */
+    margin-bottom: 30px; /* Space below logo */
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -114,13 +130,14 @@ strong {
 .btn-hero {
     background-color: var(--text-light);
     color: var(--primary-green);
-    padding: 15px 45px; /* Adjusted padding */
+    padding: 15px 45px;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 700;
-    font-size: clamp(1rem, 2.2vw, 1.3rem); /* Slightly larger button text */
+    font-size: clamp(1rem, 2.2vw, 1.3rem);
     transition: all 0.3s ease;
     display: inline-block;
+    margin-top: 20px; /* ADDED MARGIN-TOP to push it down from the logo */
 }
 .btn-hero:hover {
     background-color: #f0f0f0;
@@ -129,39 +146,36 @@ strong {
 
 .hero-wavy-line {
     position: absolute;
-    bottom: -30px; /* Pulling it UP a bit by using a negative bottom value. Adjust this! */
+    bottom: -40px; /* Adjusted if needed */
     left: 0;
     width: 100%;
-    height: auto; /* Let height be determined by image aspect ratio and width */
-    /* max-height: 300px; */ /* Removing max-height to see if it uncrops, but be careful it doesn't get TOO big */
-    object-fit: contain; /* TRY THIS: 'contain' will ensure the whole image is visible within its box.
-                           It will scale down to fit if necessary, or fill if it can.
-                           If 'contain' still crops, it means the image itself is being cut off by its container's bounds
-                           or the image file dimensions are problematic. */
-    z-index: 0;
-    pointer-events: none; /* So it doesn't interfere with clicks if it overlaps content */
+    height: auto;
+    object-fit: contain;
+    z-index: 1; /* <<<<<<< CHANGED TO 1 (below hero-content which is 2) */
+    pointer-events: none;
 }
 
 .hero-logo-clubpetro {
     position: absolute;
     bottom: 20px;
     right: 20px;
-    max-width: clamp(80px, 12vw, 130px); /* Slightly smaller to not compete with wavy lines */
-    z-index: 1;
+    max-width: clamp(80px, 12vw, 130px);
+    z-index: 3; /* Ensure it's above wavy lines and content if it overlaps */
 }
 
 .hero-vertical-text {
     position: absolute;
-    right: -90px; /* Pushed MUCH MORE to the right. Adjust this value! -80px, -100px etc. */
+    right: -110px; /* Pushed EVEN MORE to the right/edge. Original design had it well off screen. */
+    /* If it's too far, try -100px, -95px etc. */
     top: 50%;
     transform: translateY(-50%) rotate(90deg);
-    font-size: clamp(7rem, 20vw, 14rem); /* Made it larger too */
+    font-size: clamp(8rem, 22vw, 15rem); /* Further increased */
     font-weight: 900;
-    color: rgba(255, 255, 255, 0.05); /* Even more subtle */
-    z-index: 0;
+    color: rgba(255, 255, 255, 0.04); /* Even more subtle */
+    z-index: 0; /* Behind everything */
     white-space: nowrap;
-    letter-spacing: 3px;
-    pointer-events: none; /* So it doesn't interfere with clicks */
+    letter-spacing: 4px; /* More spacing */
+    pointer-events: none;
 }
 
 /* --- Split Sections (Slide 2, 3, 4, 10, 11, 14) --- */
