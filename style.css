@@ -64,72 +64,100 @@ strong {
     min-height: 100vh;
     background-image: linear-gradient(to bottom, var(--gradient-green-top), var(--gradient-green-bottom));
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column; /* Ensures items stack vertically */
+    align-items: center; /* Horizontally center content */
+    justify-content: center; /* Vertically center content */
     text-align: center;
     color: var(--text-light);
     padding: 20px;
-    overflow: hidden; /* To contain the vertical text */
+    overflow: hidden; /* To contain the vertical text and prevent scrollbars from it */
+    position: relative; /* Needed for absolute positioning of some elements */
 }
-.hero-content h1 {
-    font-size: clamp(2.5rem, 6vw, 4.5rem); /* Responsive font size */
+
+.hero-content h1 { /* Container for the two lines of text */
     font-weight: 900;
     line-height: 1.1;
-    margin-bottom: 20px;
-    position: relative;
+    margin-bottom: 40px; /* Increased space below the title block */
+    position: relative; /* For the star's positioning if needed */
 }
+
+.hero-title-line1 {
+    display: block; /* Make it a block to ensure it's on its own line */
+    font-size: clamp(1.8rem, 4vw, 2.8rem); /* Smaller font size */
+    margin-bottom: 5px; /* Small space between lines */
+}
+
+.hero-title-line2 {
+    display: block; /* Make it a block */
+    font-size: clamp(3.5rem, 8vw, 6.5rem); /* Much bigger font size */
+    display: flex; /* To align text and star nicely */
+    align-items: center; /* Vertically align text and star */
+    justify-content: center; /* Horizontally center text and star */
+}
+
 .hero-star {
-    width: clamp(20px, 4vw, 40px);
-    vertical-align: text-top; /* Or adjust with positioning */
-    margin-left: 5px;
+    width: clamp(30px, 7vw, 60px); /* Proportionally larger star */
+    height: auto; /* Maintain aspect ratio */
+    margin-left: 10px; /* Space between AUTOMÁTICO and star */
 }
+
 .hero-logo-precin {
-    max-width: clamp(200px, 30vw, 300px);
-    margin-bottom: 30px;
+    max-width: clamp(220px, 35vw, 350px); /* Adjusted size */
+    margin-bottom: 35px; /* Space below logo */
+    display: block; /* Ensure it's a block for margin auto to work if needed */
+    margin-left: auto; /* Center if parent isn't flex centering */
+    margin-right: auto; /* Center if parent isn't flex centering */
 }
+
 .btn-hero {
     background-color: var(--text-light);
     color: var(--primary-green);
-    padding: 12px 35px;
+    padding: 14px 40px; /* Slightly larger button */
     border-radius: 50px;
     text-decoration: none;
     font-weight: 700;
-    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    font-size: clamp(1rem, 2.2vw, 1.2rem);
     transition: all 0.3s ease;
     display: inline-block;
+    /* margin-top: 0; /* Resetting margin-top if any was there */
 }
 .btn-hero:hover {
     background-color: #f0f0f0;
     transform: translateY(-2px);
 }
+
 .hero-wavy-line {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 100%; /* Make it span the full width */
     height: auto;
-    max-height: 200px; /* Adjust */
-    object-fit: cover;
+    max-height: 250px; /* Increased max-height */
+    object-fit: cover; /* This might still crop if aspect ratio doesn't match 100% width and max-height */
+    /* To prevent cropping and ensure it scales, consider using it as a background or ensuring the SVG/PNG itself is designed to stretch */
+    /* For now, 'cover' will fill, 'contain' would ensure it's all visible but might leave gaps */
     z-index: 0;
 }
+
 .hero-logo-clubpetro {
     position: absolute;
-    bottom: 30px;
-    right: 30px;
-    max-width: clamp(100px, 15vw, 150px);
+    bottom: 25px; /* Adjusted */
+    right: 25px; /* Adjusted */
+    max-width: clamp(90px, 13vw, 140px);
     z-index: 1;
 }
+
 .hero-vertical-text {
     position: absolute;
-    right: -50px; /* Adjust for desired overlap */
+    right: -60px; /* Pulled more to the border, adjust as needed */
     top: 50%;
     transform: translateY(-50%) rotate(90deg);
-    font-size: clamp(5rem, 15vw, 10rem); /* Very large */
+    font-size: clamp(6rem, 18vw, 12rem); /* Adjusted size */
     font-weight: 900;
-    color: rgba(0, 0, 0, 0.08); /* Semi-transparent green or black */
+    color: rgba(255, 255, 255, 0.06); /* Lighter, more subtle white */
     z-index: 0;
     white-space: nowrap;
+    letter-spacing: 2px; /* Added some letter spacing */
 }
 
 /* --- Split Sections (Slide 2, 3, 4, 10, 11, 14) --- */
