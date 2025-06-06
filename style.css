@@ -69,11 +69,12 @@ strong {
     justify-content: center;
     text-align: center;
     color: var(--text-light);
-    padding: 20px; /* Keep some padding */
-    overflow: hidden; /* VERY IMPORTANT to clip the oversized wavy lines */
+    padding: 20px;
+    overflow: hidden;
     position: relative;
 }
 
+/* Combined .hero-content, using the latter definition as it seemed more complete */
 .hero-content {
     display: flex;
     flex-direction: column;
@@ -81,68 +82,45 @@ strong {
     justify-content: center;
     position: relative;
     z-index: 2;
-    width: 90%;
-    max-width: 1100px; /* Slightly smaller max-width for content area */
+    width: 90%; 
+    max-width: 1100px;
 }
 
 .hero-content h1 {
     font-weight: 900;
     line-height: 1.0;
-    margin-bottom: 30px; /* Adjusted */
+    margin-bottom: 30px;
     width: 100%;
 }
 
 .hero-title-line1 {
     display: block;
-    /* REDUCED SIZES FOR UNIVERSAL FIT */
-    font-size: clamp(1.4rem, 3.5vw, 2.2rem); /* <<<< ADJUSTED */
-    margin-bottom: 2px; /* Closer to AUTOMATICO */
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem); 
+    margin-bottom: 2px;
     font-weight: 700;
 }
 
 .hero-title-line2 {
     display: block;
-    font-size: clamp(3rem, 8vw, 6rem); /* Existing clamp, we might tweak the 3rem if needed */
+    font-size: clamp(3rem, 8vw, 6rem); 
     display: flex;
     align-items: center;
     justify-content: center;
     line-height: 0.95;
     text-transform: uppercase;
-    
-    /* --- FIXES FOR WORD BREAK --- */
-    white-space: nowrap; /* PREVENTS THE WORD FROM WRAPPING */
-    /* We might not need overflow-wrap and word-break if nowrap solves it,
-       but they can be fallbacks if the text is genuinely too wide for any reason. */
-    /* overflow-wrap: break-word; */ /* Commenting out for now */
-    /* word-break: break-word; */   /* Commenting out for now */
-    /* ----------------------------- */
-
-    /* Optional: If nowrap makes it overflow, we need to ensure the font size min is small enough */
-    min-width: 0; /* Helps flex items shrink if needed, though nowrap might override this for text content */
-}
-
-/* It might also be beneficial to ensure the .hero-content has enough flexibility */
-.hero-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    z-index: 2;
-    width: 90%; /* This helps, ensuring there's some padding from screen edges */
-    max-width: 1100px;
+    white-space: nowrap; 
+    min-width: 0;
 }
 
 .hero-star {
-    /* Adjust star size relative to the new title clamp */
-    width: clamp(2.8rem, 7vw, 5.5rem); /* <<<< ADJUSTED */
+    width: clamp(2.8rem, 7vw, 5.5rem); 
     height: auto;
     margin-left: clamp(8px, 1.5vw, 12px);
     flex-shrink: 0;
 }
 
 .hero-logo-precin {
-    max-width: clamp(170px, 25vw, 280px); /* Further reduced logo size */
+    max-width: clamp(170px, 25vw, 280px); 
     margin-bottom: 30px;
     display: block;
     margin-left: auto;
@@ -152,11 +130,11 @@ strong {
 .btn-hero {
     background-color: var(--text-light);
     color: var(--primary-green);
-    padding: 12px 35px; /* Slightly smaller button padding */
+    padding: 12px 35px; 
     border-radius: 50px;
     text-decoration: none;
     font-weight: 700;
-    font-size: clamp(0.85rem, 1.8vw, 1rem); /* Smaller button text */
+    font-size: clamp(0.85rem, 1.8vw, 1rem); 
     transition: all 0.3s ease;
     display: inline-block;
     margin-top: 0;
@@ -168,62 +146,53 @@ strong {
 
 .hero-wavy-line {
     position: absolute;
-    /* Let's try positioning from the top and letting it hang down */
-    top: 0; /* Start from the top of the hero section */
+    top: 0; 
     left: 0;
-    width: 100%; /* Span full width */
-    height: 100%; /* <<<< TRY THIS: Allow it to take the full height of the .hero-section */
-    
-    /* We want it to fill the space, but the image itself might dictate how it scales */
-    object-fit: cover; /* <<<< TRY THIS: This will fill the height/width, maintaining aspect ratio,
-                           and will CROP if necessary to fill. If your image is mostly wavy lines
-                           with transparent space, this might look good.
-                           If 'cover' makes it too zoomed in, we can try 'contain' again but
-                           ensure the hero-section has enough height for it. */
-    
-    /* If object-fit: cover makes the lines too thick or zoomed in,
-       and your image has a lot of transparent space, you might try:
-       object-fit: contain;
-       And ensure .hero-section has enough padding or min-height for it to expand.
-       Or, even better, if it's an SVG, it will scale beautifully.
-    */
-
-    opacity: 0.6; /* <<<< ADD OPACITY: This can help it feel more like a background
-                        element even if it's technically in front of the gradient
-                        but behind the text. Adjust value 0.0 to 1.0 */
-    
-    z-index: 1;   /* Correctly behind .hero-content (which is z-index: 2) */
-    pointer-events: none; /* So it doesn't interfere with clicks */
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    opacity: 0.6; 
+    z-index: 1;   
+    pointer-events: none;
 }
 
 .hero-logo-clubpetro {
     position: absolute;
-    bottom: 15px; /* Adjusted */
-    right: 15px; /* Adjusted */
-    max-width: clamp(60px, 9vw, 110px); /* Adjusted */
+    bottom: 15px; 
+    right: 15px; 
+    max-width: clamp(60px, 9vw, 110px); 
     z-index: 3;
 }
 
 .hero-vertical-text {
     position: absolute;
-    right: -90px; /* May need less offset if main content is smaller */
+    right: -90px; 
     top: 50%;
     transform: translateY(-50%) rotate(90deg);
-    font-size: clamp(5rem, 15vw, 10rem); /* Reduced vertical text size */
+    font-size: clamp(5rem, 15vw, 10rem); 
     font-weight: 900;
     color: rgba(255, 255, 255, 0.05);
     z-index: 0;
     white-space: nowrap;
-    letter-spacing: 3px; /* Adjusted */
+    letter-spacing: 3px; 
     pointer-events: none;
 }
 
-/* --- Split Sections (Slide 2, 3, 4, 10, 11, 14) --- */
+/* --- Split Sections (Common styles for Slide 2, 3, 4, 10, 11, 14) --- */
 .split-section {
     display: flex;
-    min-height: 80vh;
+    /* min-height: 80vh; REMOVED common min-height, will be set by specific section or default 'section' styles */
+    /* align-items: stretch; Added to specific quem-somos-section */
 }
-.split-section > div { /* Targets direct children: split-left, split-right */
+
+/* 
+   The old .split-section > div and .split-left h2 were too general.
+   We will style these more specifically per section, like for .quem-somos-section below.
+   If you have other split sections that need these exact styles, you can add them back
+   or create a more generic class for those elements within any split section.
+*/
+/*
+.split-section > div { 
     flex: 1;
     padding: 50px;
     display: flex;
@@ -236,47 +205,115 @@ strong {
     line-height: 1.1;
     margin-bottom: 20px;
 }
+*/
 
-/* Quem Somos (Slide 2) */
+/* 
+   Removing or commenting out old, less specific .quemsomos-person, .quemsomos-logo-precin, .split-right p
+   as they will be replaced by the more targeted styles within .quem-somos-section below.
+*/
+/*
 .quemsomos-person { max-width: 80%; align-self: center; margin-top: 20px; }
 .quemsomos-logo-precin { max-width: 200px; align-self: flex-start; margin-top: auto; }
 .split-right p { font-size: clamp(0.9rem, 1.8vw, 1.1rem); margin-bottom: 1.5em; }
+*/
+
+
+/* ========== START OF QUEM SOMOS SECTION STYLES (Slide 2) ========== */
+.quem-somos-section { /* This ID corresponds to <section id="quem-somos" class="quem-somos-section"> */
+    min-height: 60vh; /* 1. SMALLER VERTICALLY. Adjust as needed (e.g., 50vh, 70vh) */
+    align-items: stretch; /* Make sure children stretch to fill the new height */
+    /* display: flex; is inherited from .split-section if #quem-somos also has .split-section class */
+}
+
+.quem-somos-section .split-left {
+    flex: 0 0 40%; /* 2. GREEN BLOCK SMALLER HORIZONTALLY (40% of width). */
+    /* background-color: var(--primary-green); Assumed this is handled by .green-bg class on the div */
+    /* color: var(--text-light); Assumed this is handled by .green-bg class on the div */
+    padding: 40px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    position: relative; 
+    overflow: visible; 
+}
+
+.quem-somos-section .split-right {
+    flex: 1; /* Takes up remaining space (will be wider now) */
+    /* background-color: var(--light-bg-color); Assumed by .light-bg class */
+    /* color: var(--text-dark); Assumed by .light-bg class */
+    padding: 50px 60px; /* Increased right padding for text */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.quem-somos-section .split-left h2 { /* Targeting h2 specifically within this section's left split */
+    font-size: clamp(2.2rem, 4.5vw, 3.5rem); 
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 20px; 
+}
+
+.quemsomos-person { /* This class is on the img tag for the person */
+    position: absolute; 
+    bottom: 0; /* 5. ALIGN BOTTOM OF PERSON TO BOTTOM OF GREEN BLOCK */
+    left: 50%; 
+    transform: translateX(-50%); 
+    max-width: 90%; /* Can be a bit wider if needed */
+    max-height: 75%; /* Prevent person from being too tall, adjust this carefully */
+    object-fit: contain; 
+}
+
+.quem-somos-section .split-right p { /* Targeting paragraphs specifically within this section's right split */
+    font-size: clamp(1rem, 1.9vw, 1.25rem); /* 4. FONT BIGGER. */
+    line-height: 1.7; 
+    margin-bottom: 1.5em;
+    max-width: 550px; /* Constrain line length */
+}
+.quem-somos-section .split-right p:last-child {
+    margin-bottom: 0; 
+}
+/* ========== END OF QUEM SOMOS SECTION STYLES ========== */
+
 
 /* Stats (Slide 3) */
-#stats .split-left { align-items: center; position: relative; }
+#stats .split-left { align-items: center; position: relative; } /* This uses #stats ID so it's specific */
 .stats-map { width: 100%; max-width: 400px; opacity: 0.3; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0;}
-.stats-person { max-width: 70%; margin-bottom: -50px; z-index: 1; /* Overlap phone */ }
+.stats-person { max-width: 70%; margin-bottom: -50px; z-index: 1; }
 .stats-phone-container {
-    width: 180px; /* Adjust to fit your phone mockup */
-    height: auto; /* Adjust */
-    background-color: #333; /* Phone body color */
+    width: 180px; 
+    height: auto; 
+    background-color: #333; 
     border-radius: 20px;
     padding: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     z-index: 2;
-    margin-top: -30px; /* Pulls it up over the person */
+    margin-top: -30px; 
 }
 .stats-phone-mockup { display: block; width: 100%; border-radius: 10px; }
-.stats-logo-precin { max-width: 180px; margin-top: auto; z-index: 1; }
+/* .stats-logo-precin class was removed from HTML for this section, so commenting out or removing this CSS: */
+/* .stats-logo-precin { max-width: 180px; margin-top: auto; z-index: 1; } */
 .stat-item { margin-bottom: 30px; }
 .stat-item h3 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; margin-bottom: 5px; color: var(--text-dark); }
 .stat-item p { font-size: clamp(0.9rem, 1.8vw, 1.1rem); color: #555; }
 
 /* Próximos Passos (Slide 4) */
+/* Assuming #proximos-passos also uses .split-section. If it needs specific split styling, target it like #proximos-passos .split-left */
 .proximos-passos-person { max-width: 80%; align-self: center; margin-top: 20px; }
-.proximos-passos-logo-precin { max-width: 200px; align-self: flex-start; margin-top: auto; }
+/* .proximos-passos-logo-precin was removed from HTML, so commenting out or removing: */
+/* .proximos-passos-logo-precin { max-width: 200px; align-self: flex-start; margin-top: auto; } */
 
 /* --- Fullwidth Sections (Slide 5, 6, 7, 8, 9, 12, 15) --- */
 .fullwidth-section {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center content horizontally */
-    text-align: center; /* Center text by default */
+    align-items: center; 
+    text-align: center; 
 }
 .section-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start; /* Align to top */
+    align-items: flex-start; 
     width: 100%;
     max-width: 1100px;
     margin: 0 auto 30px auto;
@@ -292,10 +329,10 @@ strong {
     font-size: clamp(1rem, 2vw, 1.2rem);
     font-weight: 700;
     writing-mode: horizontal-tb;
-    align-self: flex-end; /* Aligns with bottom of H2 */
-    padding-bottom: 5px; /* Minor adjustment */
+    align-self: flex-end; 
+    padding-bottom: 5px; 
 }
-.header-brand-dark { /* For slide 10 */
+.header-brand-dark { 
     font-size: clamp(1rem, 2vw, 1.2rem);
     font-weight: 700;
     color: var(--text-light);
@@ -355,7 +392,7 @@ strong {
     color: var(--text-dark);
     padding: 30px;
     border-radius: 10px;
-    flex-basis: 300px; /* Min width */
+    flex-basis: 300px; 
     flex-grow: 1;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -387,12 +424,17 @@ strong {
     max-width: clamp(120px, 18vw, 180px);
     margin: 0 15px;
 }
-.savings-logo-precin {}
-.savings-logo-clubpetro {}
+/* .savings-logo-precin {} */ /* These don't need specific styles if general .savings-logos img is fine */
+/* .savings-logo-clubpetro {} */
 
 
 /* Implantação (Slide 10) */
-#implantacao .split-left-implantacao, #implantacao .split-right-implantacao { flex: 1; padding: 50px; }
+/* Assuming #implantacao also uses .split-section. We need specific styles if its splits are different */
+#implantacao .split-left-implantacao, 
+#implantacao .split-right-implantacao { /* More specific selectors if HTML structure uses these */
+    flex: 1; 
+    padding: 50px; 
+}
 #implantacao h3 { font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 10px; }
 .evolution-logo { max-width: 150px; margin-bottom: 20px; }
 #implantacao ul { list-style: none; padding: 0; }
@@ -400,29 +442,47 @@ strong {
     font-size: clamp(0.9rem, 1.8vw, 1.1rem);
     margin-bottom: 15px;
     display: flex;
-    align-items: flex-start; /* Align star with top of text */
+    align-items: flex-start; 
 }
 #implantacao li img { width: 24px; margin-right: 10px; margin-top: 2px; }
-#implantacao .split-right-implantacao { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; }
+#implantacao .split-right-implantacao { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    text-align: center; 
+    position: relative; 
+}
 #implantacao .split-right-implantacao h4 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); margin-bottom: 20px; font-weight: 700; }
 .qr-mockup { width: 100%; max-width: 450px; }
 
 /* WhatsApp Info (Slide 12) */
 .gradient-green-split-bg {
-    background: var(--primary-green); /* Fallback */
-    /* Assuming the gradient is primarily on the left on the slide */
+    background: var(--primary-green); 
 }
-#whatsapp-info .split-left-whatsapp, #whatsapp-info .split-right-whatsapp { flex: 1; padding: 50px; color: var(--text-light); }
-#whatsapp-info .split-left-whatsapp { background-image: linear-gradient(to right, var(--gradient-green-top) , var(--primary-green)); display: flex; flex-direction: column; }
-#whatsapp-info .split-right-whatsapp { background-color: var(--primary-green); /* Solid part */ }
+/* Assuming #whatsapp-info uses .split-section */
+#whatsapp-info .split-left-whatsapp, 
+#whatsapp-info .split-right-whatsapp { 
+    flex: 1; 
+    padding: 50px; 
+    color: var(--text-light); 
+}
+#whatsapp-info .split-left-whatsapp { 
+    background-image: linear-gradient(to right, var(--gradient-green-top) , var(--primary-green)); 
+    display: flex; 
+    flex-direction: column; 
+}
+#whatsapp-info .split-right-whatsapp { 
+    background-color: var(--primary-green); 
+}
 
 #whatsapp-info h3 { font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 20px; }
 .whatsapp-phones { width: 100%; max-width: 350px; display: block; margin: 20px auto; }
 .whatsapp-caption { font-size: 0.9em; text-align: center; margin-top: auto; }
 .whatsapp-feature { display: flex; align-items: flex-start; margin-bottom: 20px; }
-.whatsapp-feature .feature-star { width: 24px; margin-right: 15px; margin-top: 5px; /* Adjust based on your star image */ }
+.whatsapp-feature .feature-star { width: 24px; margin-right: 15px; margin-top: 5px; }
 .whatsapp-feature p { font-size: clamp(0.9rem, 1.8vw, 1.1rem); margin: 0; }
-#whatsapp-info .logo-container-bottom img { filter: brightness(0) invert(1); } /* Make logo white */
+#whatsapp-info .logo-container-bottom img { filter: brightness(0) invert(1); }
 
 /* Relatório (Slide 13) */
 .relatorio-mockup { width: 100%; max-width: 900px; margin-bottom: 30px; }
@@ -440,11 +500,20 @@ strong {
 
 
 /* Valores (Slide 14) */
-#valores .split-left-valores, #valores .split-right-valores { flex: 1; padding: 50px; }
-#valores .split-left-valores { display: flex; flex-direction: column; justify-content: center; }
+/* Assuming #valores uses .split-section */
+#valores .split-left-valores, 
+#valores .split-right-valores { 
+    flex: 1; 
+    padding: 50px; 
+}
+#valores .split-left-valores { 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+}
 #valores .split-left-valores h2 { font-size: clamp(2.2rem, 4.5vw, 3.2rem); margin-bottom: 30px; }
 .pricing-plan {
-    background-color: #f0f0f0; /* Light grey */
+    background-color: #f0f0f0; 
     border-radius: 10px;
     padding: 25px;
     margin-bottom: 25px;
@@ -465,14 +534,17 @@ strong {
 .plan-price-new { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; color: var(--primary-green); }
 
 #valores .split-right-valores {
-    display: flex; flex-direction: column; align-items: center; position: relative;
-    background-image: url('img/valores-background-subtle-green.png'); /* IF you have a subtle bg pattern for this side */
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    position: relative;
+    background-image: url('img/valores-background-subtle-green.png'); 
     background-size: cover;
     background-position: center;
 }
 .valores-clubpetro-logo { max-width: 150px; margin-bottom: 20px; align-self: flex-end; }
 .info-box {
-    background-color: var(--primary-green-light); /* Light green */
+    background-color: var(--primary-green-light); 
     color: var(--text-light);
     padding: 20px;
     border-radius: 10px;
@@ -483,14 +555,14 @@ strong {
 }
 .info-box h4 { font-size: 1.2em; margin-bottom: 8px; font-weight: 700; }
 .info-box p { font-size: 0.95em; margin: 0; }
-.valores-person { max-width: 280px; margin-top: 20px; /* position: absolute; bottom: 0; right: 0; or adjust with margin */ }
-.valores-logo-precin { max-width: 150px; margin-top: auto; align-self: flex-start; }
+.valores-person { max-width: 280px; margin-top: 20px; }
+/* .valores-logo-precin was removed from HTML, so commenting out */
+/* .valores-logo-precin { max-width: 150px; margin-top: auto; align-self: flex-start; } */
 
 /* Contato / Tally Form (Slide 15) */
 .contact-section {
     min-height: 80vh;
-    background-image: linear-gradient(to bottom, var(--primary-green-light), var(--primary-green)); /* Or use your PNG */
-    /* background-image: url('img/contact-background-gradient.png'); */
+    background-image: linear-gradient(to bottom, var(--primary-green-light), var(--primary-green)); 
     background-size: cover;
     background-position: center;
 }
@@ -500,26 +572,26 @@ strong {
 .contact-info .phone-number img { width: 20px; margin-right: 8px; }
 #tally-form-embed-container {
     width: 100%;
-    max-width: 600px; /* Adjust as needed */
+    max-width: 600px; 
     margin: 0 auto;
-    background-color: rgba(255,255,255, 0.1); /* Slight overlay for better form visibility */
+    background-color: rgba(255,255,255, 0.1); 
     border-radius: 10px;
     padding: 15px;
 }
 #tally-form-embed-container iframe {
-    width: 100% !important; /* Override Tally styles if necessary */
-    min-height: 450px; /* Adjust based on your form length */
+    width: 100% !important; 
+    min-height: 450px; 
     border: none;
-    border-radius: 8px; /* Match container */
+    border-radius: 8px; 
 }
 
 
 /* Responsive Adjustments */
 @media (max-width: 992px) {
-    .split-section {
+    .split-section:not(.quem-somos-section) { /* Exclude quem-somos from this general mobile stacking if it has its own */
         flex-direction: column;
     }
-    .split-section > div {
+    .split-section:not(.quem-somos-section) > div {
         min-height: 50vh; /* Give some height when stacked */
     }
     .hero-vertical-text {
@@ -531,18 +603,38 @@ strong {
     .content-left-right { flex-direction: column; }
     .flow-diagram { flex-direction: column; align-items: center; }
     .flow-arrow { transform: rotate(90deg); margin: 10px 0; }
-    #implantacao .split-left-implantacao, #implantacao .split-right-implantacao {
-        align-items: center; text-align: center;
+    
+    /* More specific mobile for #implantacao if it uses .split-section */
+    #implantacao.split-section { flex-direction: column; }
+    #implantacao .split-left-implantacao, 
+    #implantacao .split-right-implantacao {
+        align-items: center; text-align: center; flex-basis: auto; width: 100%;
     }
     #implantacao ul { text-align: left; }
-    #whatsapp-info .split-left-whatsapp, #whatsapp-info .split-right-whatsapp { text-align: center; }
-    #whatsapp-info .split-left-whatsapp { background-image: linear-gradient(to bottom, var(--gradient-green-top) , var(--primary-green)); } /* Full gradient on mobile */
+
+    /* More specific mobile for #whatsapp-info if it uses .split-section */
+    #whatsapp-info.split-section { flex-direction: column; }
+    #whatsapp-info .split-left-whatsapp, 
+    #whatsapp-info .split-right-whatsapp { 
+        text-align: center; flex-basis: auto; width: 100%;
+    }
+    #whatsapp-info .split-left-whatsapp { 
+        background-image: linear-gradient(to bottom, var(--gradient-green-top) , var(--primary-green)); 
+    }
     .whatsapp-feature { flex-direction: column; align-items: center; text-align: center; }
     .whatsapp-feature .feature-star { margin-bottom: 10px; }
 }
 
 @media (max-width: 768px) {
     section { padding: 40px 20px; }
+    /* General .split-section mobile stacking if not handled by more specific rules */
+    .split-section:not(.quem-somos-section):not(#implantacao):not(#whatsapp-info) { 
+        flex-direction: column;
+    }
+     .split-section:not(.quem-somos-section):not(#implantacao):not(#whatsapp-info) > div {
+        flex-basis: auto; width: 100%;
+    }
+
     .stats-person { max-width: 90%; }
     .stats-phone-container { width: 150px; }
     .invest-reasons { flex-direction: column; }
@@ -550,4 +642,32 @@ strong {
     .savings-logos img { max-width: 120px; margin: 0 10px; }
     .relatorio-features { flex-direction: column; align-items: center; gap: 15px; }
     .relatorio-feature-item { text-align: center; }
+
+    /* Responsive adjustments for Quem Somos specifically */
+    .quem-somos-section {
+        flex-direction: column; /* Stack on mobile */
+        min-height: auto; /* Let content dictate height on mobile */
+    }
+    .quem-somos-section .split-left,
+    .quem-somos-section .split-right {
+        flex-basis: auto; /* Reset flex-basis */
+        width: 100%;
+    }
+    .quem-somos-section .split-left {
+        padding-bottom: 0; 
+        min-height: 300px; /* Or adjust based on person image aspect ratio */
+        /* justify-content: flex-start; /* If title needs to be at top on mobile */
+    }
+    .quemsomos-person {
+        position: relative; 
+        bottom: auto; /* Reset from absolute */
+        left: auto;   /* Reset from absolute */
+        transform: none; /* Reset from absolute */
+        margin: 20px auto 0 auto; /* Center with some top margin, no bottom margin if it sits on edge */
+        max-height: 250px; 
+        /* max-width: 70%; */ /* Control width on mobile if needed */
+    }
+    .quem-somos-section .split-right {
+        padding: 40px; /* Consistent padding for mobile text */
+    }
 }
