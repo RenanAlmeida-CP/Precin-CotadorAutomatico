@@ -220,13 +220,13 @@ strong {
 
 /* ========== START OF QUEM SOMOS SECTION STYLES (Slide 2) ========== */
 .quem-somos-section { /* This ID corresponds to <section id="quem-somos" class="quem-somos-section"> */
-    min-height: 60vh; /* 1. SMALLER VERTICALLY. Adjust as needed (e.g., 50vh, 70vh) */
+    min-height: 50vh; /* 1. SMALLER VERTICALLY. Adjust as needed (e.g., 50vh, 70vh) */
     align-items: stretch; /* Make sure children stretch to fill the new height */
     /* display: flex; is inherited from .split-section if #quem-somos also has .split-section class */
 }
 
 .quem-somos-section .split-left {
-    flex: 0 0 40%; /* 2. GREEN BLOCK SMALLER HORIZONTALLY (40% of width). */
+    flex: 0 0 60%; /* 2. GREEN BLOCK SMALLER HORIZONTALLY (40% of width). */
     /* background-color: var(--primary-green); Assumed this is handled by .green-bg class on the div */
     /* color: var(--text-light); Assumed this is handled by .green-bg class on the div */
     padding: 40px; 
@@ -256,11 +256,11 @@ strong {
 
 .quemsomos-person { /* This class is on the img tag for the person */
     position: absolute; 
-    bottom: 0; /* 5. ALIGN BOTTOM OF PERSON TO BOTTOM OF GREEN BLOCK */
+    bottom: -1; /* 5. ALIGN BOTTOM OF PERSON TO BOTTOM OF GREEN BLOCK */
     left: 50%; 
     transform: translateX(-50%); 
     max-width: 90%; /* Can be a bit wider if needed */
-    max-height: 75%; /* Prevent person from being too tall, adjust this carefully */
+    max-height: 85%; /* Prevent person from being too tall, adjust this carefully */
     object-fit: contain; 
 }
 
