@@ -102,15 +102,35 @@ strong {
 
 .hero-title-line2 {
     display: block;
-    /* REDUCED SIZES FOR UNIVERSAL FIT */
-    font-size: clamp(3rem, 8vw, 6rem); /* <<<< ADJUSTED (Max 6rem now) */
+    font-size: clamp(3rem, 8vw, 6rem); /* Existing clamp, we might tweak the 3rem if needed */
     display: flex;
     align-items: center;
     justify-content: center;
     line-height: 0.95;
     text-transform: uppercase;
-    overflow-wrap: break-word;
-    word-break: break-word;
+    
+    /* --- FIXES FOR WORD BREAK --- */
+    white-space: nowrap; /* PREVENTS THE WORD FROM WRAPPING */
+    /* We might not need overflow-wrap and word-break if nowrap solves it,
+       but they can be fallbacks if the text is genuinely too wide for any reason. */
+    /* overflow-wrap: break-word; */ /* Commenting out for now */
+    /* word-break: break-word; */   /* Commenting out for now */
+    /* ----------------------------- */
+
+    /* Optional: If nowrap makes it overflow, we need to ensure the font size min is small enough */
+    min-width: 0; /* Helps flex items shrink if needed, though nowrap might override this for text content */
+}
+
+/* It might also be beneficial to ensure the .hero-content has enough flexibility */
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    width: 90%; /* This helps, ensuring there's some padding from screen edges */
+    max-width: 1100px;
 }
 
 .hero-star {
