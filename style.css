@@ -80,30 +80,30 @@ strong {
     align-items: center;
     justify-content: center;
     position: relative;
-    z-index: 2; /* <<<< CONTENT IS ON TOP */
+    z-index: 2;
     width: 90%;
-    max-width: 1200px;
+    max-width: 1100px; /* Slightly smaller max-width for content area */
 }
 
 .hero-content h1 {
     font-weight: 900;
     line-height: 1.0;
-    margin-bottom: 35px; /* Adjusted */
+    margin-bottom: 30px; /* Adjusted */
     width: 100%;
 }
 
 .hero-title-line1 {
     display: block;
-    /* SLIGHTLY SMALLER DESKTOP, AND SMALLER MIN FOR MOBILE */
-    font-size: clamp(1.6rem, 4vw, 2.8rem); /* <<<< ADJUSTED */
-    margin-bottom: 0px;
+    /* REDUCED SIZES FOR UNIVERSAL FIT */
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem); /* <<<< ADJUSTED */
+    margin-bottom: 2px; /* Closer to AUTOMATICO */
     font-weight: 700;
 }
 
 .hero-title-line2 {
     display: block;
-    /* SLIGHTLY SMALLER DESKTOP, AND SMALLER MIN FOR MOBILE */
-    font-size: clamp(3.8rem, 10vw, 7.5rem); /* <<<< ADJUSTED (Max 7.5rem now) */
+    /* REDUCED SIZES FOR UNIVERSAL FIT */
+    font-size: clamp(3rem, 8vw, 6rem); /* <<<< ADJUSTED (Max 6rem now) */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -115,15 +115,15 @@ strong {
 
 .hero-star {
     /* Adjust star size relative to the new title clamp */
-    width: clamp(3.2rem, 9vw, 6.5rem); /* <<<< ADJUSTED */
+    width: clamp(2.8rem, 7vw, 5.5rem); /* <<<< ADJUSTED */
     height: auto;
-    margin-left: clamp(10px, 2vw, 15px); /* Reduced max margin slightly */
+    margin-left: clamp(8px, 1.5vw, 12px);
     flex-shrink: 0;
 }
 
 .hero-logo-precin {
-    max-width: clamp(180px, 28vw, 300px);
-    margin-bottom: 35px; /* Increased space to button */
+    max-width: clamp(170px, 25vw, 280px); /* Further reduced logo size */
+    margin-bottom: 30px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -132,14 +132,14 @@ strong {
 .btn-hero {
     background-color: var(--text-light);
     color: var(--primary-green);
-    padding: 14px 40px;
+    padding: 12px 35px; /* Slightly smaller button padding */
     border-radius: 50px;
     text-decoration: none;
     font-weight: 700;
-    font-size: clamp(0.9rem, 2vw, 1.1rem); /* Slightly smaller max button text */
+    font-size: clamp(0.85rem, 1.8vw, 1rem); /* Smaller button text */
     transition: all 0.3s ease;
     display: inline-block;
-    margin-top: 0; /* Button is directly after logo, space controlled by logo's margin-bottom */
+    margin-top: 0;
 }
 .btn-hero:hover {
     background-color: #f0f0f0;
@@ -148,35 +148,35 @@ strong {
 
 .hero-wavy-line {
     position: absolute;
-    bottom: -20px; /* Let's try bringing it down a tiny bit from the previous attempt */
+    bottom: -15px; /* Adjusted based on potentially smaller content block */
     left: 0;
     width: 100%;
     height: auto;
-    max-height: 40vh; /* Can be a bit generous if it's behind content */
+    max-height: 35vh; /* Reduced slightly */
     object-fit: contain;
-    z-index: 1; /* <<<< WAVY LINES ARE BEHIND .hero-content (z-index: 2) */
+    z-index: 1;
     pointer-events: none;
 }
 
 .hero-logo-clubpetro {
     position: absolute;
-    bottom: 20px;
-    right: 20px;
-    max-width: clamp(70px, 10vw, 120px);
-    z-index: 3; /* On top of everything in this section */
+    bottom: 15px; /* Adjusted */
+    right: 15px; /* Adjusted */
+    max-width: clamp(60px, 9vw, 110px); /* Adjusted */
+    z-index: 3;
 }
 
 .hero-vertical-text {
     position: absolute;
-    right: -100px;
+    right: -90px; /* May need less offset if main content is smaller */
     top: 50%;
     transform: translateY(-50%) rotate(90deg);
-    font-size: clamp(6rem, 18vw, 11rem); /* Slightly reduced max for vertical text */
+    font-size: clamp(5rem, 15vw, 10rem); /* Reduced vertical text size */
     font-weight: 900;
     color: rgba(255, 255, 255, 0.05);
-    z-index: 0; /* BEHIND EVERYTHING */
+    z-index: 0;
     white-space: nowrap;
-    letter-spacing: 4px;
+    letter-spacing: 3px; /* Adjusted */
     pointer-events: none;
 }
 
