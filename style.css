@@ -69,8 +69,8 @@ strong {
     justify-content: center;
     text-align: center;
     color: var(--text-light);
-    padding: 20px;
-    overflow: hidden;
+    padding: 20px; /* Keep some padding */
+    overflow: hidden; /* VERY IMPORTANT to clip the oversized wavy lines */
     position: relative;
 }
 
@@ -168,14 +168,32 @@ strong {
 
 .hero-wavy-line {
     position: absolute;
-    bottom: -15px; /* Adjusted based on potentially smaller content block */
+    /* Let's try positioning from the top and letting it hang down */
+    top: 0; /* Start from the top of the hero section */
     left: 0;
-    width: 100%;
-    height: auto;
-    max-height: 35vh; /* Reduced slightly */
-    object-fit: contain;
-    z-index: 1;
-    pointer-events: none;
+    width: 100%; /* Span full width */
+    height: 100%; /* <<<< TRY THIS: Allow it to take the full height of the .hero-section */
+    
+    /* We want it to fill the space, but the image itself might dictate how it scales */
+    object-fit: cover; /* <<<< TRY THIS: This will fill the height/width, maintaining aspect ratio,
+                           and will CROP if necessary to fill. If your image is mostly wavy lines
+                           with transparent space, this might look good.
+                           If 'cover' makes it too zoomed in, we can try 'contain' again but
+                           ensure the hero-section has enough height for it. */
+    
+    /* If object-fit: cover makes the lines too thick or zoomed in,
+       and your image has a lot of transparent space, you might try:
+       object-fit: contain;
+       And ensure .hero-section has enough padding or min-height for it to expand.
+       Or, even better, if it's an SVG, it will scale beautifully.
+    */
+
+    opacity: 0.6; /* <<<< ADD OPACITY: This can help it feel more like a background
+                        element even if it's technically in front of the gradient
+                        but behind the text. Adjust value 0.0 to 1.0 */
+    
+    z-index: 1;   /* Correctly behind .hero-content (which is z-index: 2) */
+    pointer-events: none; /* So it doesn't interfere with clicks */
 }
 
 .hero-logo-clubpetro {
