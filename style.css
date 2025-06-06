@@ -341,28 +341,114 @@ strong {
     right: 40px;
 }
 
+/* In style.css, find the "Como Funciona Flow (Slide 5)" section */
+
 /* Como Funciona Flow (Slide 5) */
+#como-funciona-flow .section-header { /* Ensure the header (COMO FUNCIONA?) is centered if brand is removed */
+    justify-content: flex-start; /* Or 'center' if you want the title centered */
+    /* If you want the title fully centered after removing PRECIN |:
+    justify-content: center;
+    text-align: center; */
+}
+/* If the h2 itself needs to be centered because its parent is no longer space-between: */
+/* #como-funciona-flow .section-header h2 { margin: 0 auto; text-align: center; } */
+
+
 .flow-diagram {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
+    /* flex-direction: row; /* Default, for horizontal flow */
+    justify-content: center; /* Center the items if they don't fill the width */
+    align-items: center; /* Vertically align boxes and arrows */
+    flex-wrap: wrap; /* Allow items to wrap to the next line on smaller screens */
+    gap: 15px; /* Reduced gap slightly */
     margin-bottom: 30px;
-    max-width: 1200px;
+    max-width: 1200px; /* Or adjust as needed */
+    width: 100%; /* Ensure it tries to use available width */
 }
+
+.flow-step {
+    display: flex; /* To help with internal alignment if needed, but mainly for consistency */
+    align-items: center;
+}
+
 .flow-box {
     background-color: var(--primary-green-light);
     color: var(--text-light);
-    padding: 20px;
+    padding: 15px 20px; /* Adjusted padding */
     border-radius: 10px;
     font-weight: 700;
-    min-width: 180px;
-    text-align: center;
-    font-size: 0.9em;
+    
+    /* --- CHANGES FOR TEXT WRAPPING & BOX SIZE --- */
+    min-height: 50px; /* Ensure a minimum height for 2-3 lines */
+    height: auto;     /* Allow height to grow with content */
+    width: 220px;     /* <<<< SET A FIXED OR MAX-WIDTH FOR THE BOX */
+                      /* Adjust this width to encourage 2-3 lines of text.
+                         If text is still one line, make this narrower.
+                         If text is 4+ lines, make this wider. */
+    max-width: 250px; /* A max-width if using a percentage for width */
+    
+    /* white-space: normal; /* <<<< ENSURE TEXT CAN WRAP (default is normal, but good to be explicit) */
+    /* word-wrap: break-word; /* Allow breaking long words if necessary, not ideal for short phrases */
+    /* overflow-wrap: break-word; */
+    
+    display: flex; /* For centering text inside the box */
+    align-items: center;
+    justify-content: center;
+    text-align: center; /* Center the text lines */
+    font-size: 0.85em; /* Slightly smaller font if needed to fit text */
+    line-height: 1.4; /* Adjust for readability of multi-line text */
+    /* ------------------------------------------ */
 }
-.flow-arrow { max-width: 40px; }
-.flow-caption { max-width: 800px; margin: 20px auto; font-size: clamp(0.9rem, 1.8vw, 1.1rem); }
+
+.flow-arrow { 
+    max-width: 35px; /* Slightly smaller arrow */
+    height: auto; /* Maintain aspect ratio */
+    align-self: center; /* Ensure arrows are centered with the boxes */
+}
+
+.flow-caption { 
+    max-width: 750px; 
+    margin: 20px auto; 
+    font-size: clamp(0.85rem, 1.7vw, 1rem); /* Slightly smaller caption */
+}
+
+/* Responsive adjustments for the flow diagram */
+@media (max-width: 992px) { /* Adjust breakpoint if needed */
+    .flow-diagram {
+        /* Keep flex-direction: row; and rely on flex-wrap for stacking,
+           or explicitly change to column if preferred for tablets */
+    }
+    .flow-box {
+        width: 200px; /* Adjust width for tablet */
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 767px) { /* Mobile */
+    #como-funciona-flow .section-header {
+        justify-content: center; /* Center title on mobile */
+        text-align: center;
+    }
+     #como-funciona-flow .section-header h2 {
+        margin: 0 auto; /* Center title block */
+    }
+    .flow-diagram {
+        flex-direction: column; /* Stack steps vertically on mobile */
+        align-items: center; /* Center items when stacked */
+        gap: 15px;
+    }
+    .flow-arrow {
+        transform: rotate(90deg); /* Point arrows down */
+        margin: 5px 0; /* Adjust margin for vertical arrows */
+    }
+    .flow-box {
+        width: 80%; /* Make boxes wider on mobile since they stack */
+        max-width: 300px; /* But not too wide */
+        min-height: 40px;
+        padding: 12px 15px;
+        font-size: 0.85em;
+    }
+}
 
 /* Como Funciona Dashboard (Slide 6) */
 .content-left-right {
