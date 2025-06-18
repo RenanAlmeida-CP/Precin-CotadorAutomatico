@@ -17,23 +17,24 @@ body, html {
     font-family: var(--font-primary);
     scroll-behavior: smooth;
     overflow-x: hidden; /* Prevent horizontal scroll */
+    background-color: var(--light-bg-color); /* Default page background */
 }
 
 section {
     padding: 60px 40px;
     box-sizing: border-box;
-    min-height: 70vh; /* Minimum height for sections */
+    min-height: 70vh;
     position: relative;
 }
 
 h1, h2, h3, h4 {
     margin-top: 0;
-    font-weight: 900; /* Extra bold for titles */
+    font-weight: 900;
 }
 
 p {
     line-height: 1.6;
-    font-size: 1em; /* Base size, adjust per section */
+    font-size: 1em;
 }
 strong {
     font-weight: 700;
@@ -44,10 +45,9 @@ strong {
 .text-center { text-align: center; }
 
 .green-bg { background-color: var(--primary-green); color: var(--text-light); }
-.dark-green-bg { background-color: var(--primary-green); color: var(--text-light); } /* Slide 10 BG is dark */
+.dark-green-bg { background-color: var(--primary-green); color: var(--text-light); }
 .light-bg { background-color: var(--light-bg-color); color: var(--text-dark); }
 .light-purple-bg { background-color: var(--light-purple-bg); color: var(--text-dark); }
-
 
 .logo-container-bottom {
     text-align: center;
@@ -57,7 +57,6 @@ strong {
     max-width: 180px;
     opacity: 0.8;
 }
-
 
 /* --- Hero Section (Slide 1) --- */
 .hero-section {
@@ -74,15 +73,14 @@ strong {
     position: relative;
 }
 
-/* Combined .hero-content, using the latter definition as it seemed more complete */
 .hero-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
-    z-index: 2;
-    width: 90%; 
+    z-index: 2; /* Content on top */
+    width: 90%;
     max-width: 1100px;
 }
 
@@ -95,32 +93,32 @@ strong {
 
 .hero-title-line1 {
     display: block;
-    font-size: clamp(1.4rem, 3.5vw, 2.2rem); 
+    font-size: clamp(1.4rem, 3.5vw, 2.2rem);
     margin-bottom: 2px;
     font-weight: 700;
 }
 
 .hero-title-line2 {
     display: block;
-    font-size: clamp(3rem, 8vw, 6rem); 
+    font-size: clamp(3rem, 8vw, 6rem); /* Aiming for universal fit */
     display: flex;
     align-items: center;
     justify-content: center;
     line-height: 0.95;
     text-transform: uppercase;
-    white-space: nowrap; 
-    min-width: 0;
+    white-space: nowrap; /* Prevent "AUTOMATICO" from breaking */
+    min-width: 0; /* Helps flex behave if text is still too wide */
 }
 
 .hero-star {
-    width: clamp(2.8rem, 7vw, 5.5rem); 
+    width: clamp(2.8rem, 7vw, 5.5rem);
     height: auto;
     margin-left: clamp(8px, 1.5vw, 12px);
     flex-shrink: 0;
 }
 
 .hero-logo-precin {
-    max-width: clamp(170px, 25vw, 280px); 
+    max-width: clamp(170px, 25vw, 280px);
     margin-bottom: 30px;
     display: block;
     margin-left: auto;
@@ -130,11 +128,11 @@ strong {
 .btn-hero {
     background-color: var(--text-light);
     color: var(--primary-green);
-    padding: 12px 35px; 
+    padding: 12px 35px;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 700;
-    font-size: clamp(0.85rem, 1.8vw, 1rem); 
+    font-size: clamp(0.85rem, 1.8vw, 1rem);
     transition: all 0.3s ease;
     display: inline-block;
     margin-top: 0;
@@ -146,181 +144,109 @@ strong {
 
 .hero-wavy-line {
     position: absolute;
-    top: 0; 
+    bottom: -15px;
     left: 0;
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-    opacity: 0.6; 
-    z-index: 1;   
+    width: 100%;
+    height: auto;
+    max-height: 35vh;
+    object-fit: contain;
+    z-index: 1; /* Wavy lines behind content */
     pointer-events: none;
 }
 
 .hero-logo-clubpetro {
     position: absolute;
-    bottom: 15px; 
-    right: 15px; 
-    max-width: clamp(60px, 9vw, 110px); 
-    z-index: 3;
+    bottom: 15px;
+    right: 15px;
+    max-width: clamp(60px, 9vw, 110px);
+    z-index: 3; /* Clubpetro logo on top of everything in hero */
 }
 
 .hero-vertical-text {
     position: absolute;
-    right: -90px; 
+    right: -90px;
     top: 50%;
     transform: translateY(-50%) rotate(90deg);
-    font-size: clamp(5rem, 15vw, 10rem); 
+    font-size: clamp(5rem, 15vw, 10rem);
     font-weight: 900;
     color: rgba(255, 255, 255, 0.05);
-    z-index: 0;
+    z-index: 0; /* Background text behind everything */
     white-space: nowrap;
-    letter-spacing: 3px; 
+    letter-spacing: 3px;
     pointer-events: none;
 }
 
-/* --- Split Sections (Common styles for Slide 2, 3, 4, 10, 11, 14) --- */
+
+/* --- Split Sections (Common Styles) --- */
 .split-section {
     display: flex;
-    /* min-height: 80vh; REMOVED common min-height, will be set by specific section or default 'section' styles */
-    /* align-items: stretch; Added to specific quem-somos-section */
+    min-height: 80vh; /* Or adjust as needed */
 }
-
-/* 
-   The old .split-section > div and .split-left h2 were too general.
-   We will style these more specifically per section, like for .quem-somos-section below.
-   If you have other split sections that need these exact styles, you can add them back
-   or create a more generic class for those elements within any split section.
-*/
-/*
-.split-section > div { 
+.split-section > div { /* Targets direct children like split-left, split-right */
     flex: 1;
     padding: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.split-left h2 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
+.split-left h2, .split-left-valores h2, #implantacao .split-left-implantacao h3, #whatsapp-info .split-left-whatsapp h3 { /* Targeting various H2s/H3s in left splits */
+    font-size: clamp(2.2rem, 4.5vw, 3.5rem); /* Consistent title sizing for these */
     font-weight: 900;
     line-height: 1.1;
     margin-bottom: 20px;
 }
-*/
+.split-right p, #valores .split-right-valores p, #implantacao .split-left-implantacao li { /* Targeting various paragraphs/list items */
+    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+    margin-bottom: 1.5em;
+}
 
-/* 
-   Removing or commenting out old, less specific .quemsomos-person, .quemsomos-logo-precin, .split-right p
-   as they will be replaced by the more targeted styles within .quem-somos-section below.
-*/
-/*
+
+/* Quem Somos (Slide 2) */
 .quemsomos-person { max-width: 80%; align-self: center; margin-top: 20px; }
 .quemsomos-logo-precin { max-width: 200px; align-self: flex-start; margin-top: auto; }
-.split-right p { font-size: clamp(0.9rem, 1.8vw, 1.1rem); margin-bottom: 1.5em; }
-*/
-
-
-/* ========== START OF QUEM SOMOS SECTION STYLES (Slide 2) ========== */
-.quem-somos-section { /* This ID corresponds to <section id="quem-somos" class="quem-somos-section"> */
-    min-height: 50vh; /* 1. SMALLER VERTICALLY. Adjust as needed (e.g., 50vh, 70vh) */
-    align-items: stretch; /* Make sure children stretch to fill the new height */
-    /* display: flex; is inherited from .split-section if #quem-somos also has .split-section class */
-}
-
-.quem-somos-section .split-left {
-    flex: 0 0 60%; /* 2. GREEN BLOCK SMALLER HORIZONTALLY (40% of width). */
-    /* background-color: var(--primary-green); Assumed this is handled by .green-bg class on the div */
-    /* color: var(--text-light); Assumed this is handled by .green-bg class on the div */
-    padding: 40px; 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; 
-    position: relative; 
-    overflow: visible; 
-}
-
-.quem-somos-section .split-right {
-    flex: 1; /* Takes up remaining space (will be wider now) */
-    /* background-color: var(--light-bg-color); Assumed by .light-bg class */
-    /* color: var(--text-dark); Assumed by .light-bg class */
-    padding: 50px 60px; /* Increased right padding for text */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.quem-somos-section .split-left h2 { /* Targeting h2 specifically within this section's left split */
-    font-size: clamp(2.2rem, 4.5vw, 3.5rem); 
-    font-weight: 900;
-    line-height: 1.1;
-    margin-bottom: 20px; 
-}
-
-.quemsomos-person { /* This class is on the img tag for the person */
-    position: absolute; 
-    bottom: -1; /* 5. ALIGN BOTTOM OF PERSON TO BOTTOM OF GREEN BLOCK */
-    left: 50%; 
-    transform: translateX(-50%); 
-    max-width: 90%; /* Can be a bit wider if needed */
-    max-height: 85%; /* Prevent person from being too tall, adjust this carefully */
-    object-fit: contain; 
-}
-
-.quem-somos-section .split-right p { /* Targeting paragraphs specifically within this section's right split */
-    font-size: clamp(1rem, 1.9vw, 1.25rem); /* 4. FONT BIGGER. */
-    line-height: 1.7; 
-    margin-bottom: 1.5em;
-    max-width: 550px; /* Constrain line length */
-}
-.quem-somos-section .split-right p:last-child {
-    margin-bottom: 0; 
-}
-/* ========== END OF QUEM SOMOS SECTION STYLES ========== */
-
 
 /* Stats (Slide 3) */
-#stats .split-left { align-items: center; position: relative; } /* This uses #stats ID so it's specific */
+#stats .split-left { align-items: center; position: relative; }
 .stats-map { width: 100%; max-width: 400px; opacity: 0.3; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0;}
 .stats-person { max-width: 70%; margin-bottom: -50px; z-index: 1; }
 .stats-phone-container {
-    width: 180px; 
-    height: auto; 
-    background-color: #333; 
+    width: 180px;
+    height: auto;
+    background-color: #333;
     border-radius: 20px;
     padding: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     z-index: 2;
-    margin-top: -30px; 
+    margin-top: -30px;
 }
 .stats-phone-mockup { display: block; width: 100%; border-radius: 10px; }
-/* .stats-logo-precin class was removed from HTML for this section, so commenting out or removing this CSS: */
-/* .stats-logo-precin { max-width: 180px; margin-top: auto; z-index: 1; } */
-.stat-item { margin-bottom: 30px; }
-.stat-item h3 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; margin-bottom: 5px; color: var(--text-dark); }
-.stat-item p { font-size: clamp(0.9rem, 1.8vw, 1.1rem); color: #555; }
+.stats-logo-precin { max-width: 180px; margin-top: auto; z-index: 1; }
+.stat-item { margin-bottom: 30px; text-align: left; } /* Ensuring stats text align left */
+.stat-item h3 { font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 900; margin-bottom: 5px; color: var(--text-dark); }
+.stat-item p { font-size: clamp(0.9rem, 1.8vw, 1rem); color: #555; }
 
 /* Próximos Passos (Slide 4) */
-/* Assuming #proximos-passos also uses .split-section. If it needs specific split styling, target it like #proximos-passos .split-left */
 .proximos-passos-person { max-width: 80%; align-self: center; margin-top: 20px; }
-/* .proximos-passos-logo-precin was removed from HTML, so commenting out or removing: */
-/* .proximos-passos-logo-precin { max-width: 200px; align-self: flex-start; margin-top: auto; } */
+.proximos-passos-logo-precin { max-width: 200px; align-self: flex-start; margin-top: auto; }
 
-/* --- Fullwidth Sections (Slide 5, 6, 7, 8, 9, 12, 15) --- */
+/* --- Fullwidth Sections (Common Styles) --- */
 .fullwidth-section {
     display: flex;
     flex-direction: column;
-    align-items: center; 
-    text-align: center; 
+    align-items: center;
+    text-align: center;
 }
 .section-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start; 
+    align-items: flex-start;
     width: 100%;
     max-width: 1100px;
     margin: 0 auto 30px auto;
     text-align: left;
 }
-.section-header h2 {
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
+.section-header h2, #porque-investir h2, #relatorio .section-header h2, .contact-section h2 { /* Targeting various H2s */
+    font-size: clamp(2.2rem, 4.5vw, 3.2rem); /* Consistent title sizing */
     font-weight: 900;
     line-height: 1.1;
     margin-bottom: 0;
@@ -328,11 +254,10 @@ strong {
 .header-brand {
     font-size: clamp(1rem, 2vw, 1.2rem);
     font-weight: 700;
-    writing-mode: horizontal-tb;
-    align-self: flex-end; 
-    padding-bottom: 5px; 
+    align-self: flex-end;
+    padding-bottom: 5px;
 }
-.header-brand-dark { 
+.header-brand-dark {
     font-size: clamp(1rem, 2vw, 1.2rem);
     font-weight: 700;
     color: var(--text-light);
@@ -341,114 +266,28 @@ strong {
     right: 40px;
 }
 
-/* In style.css, find the "Como Funciona Flow (Slide 5)" section */
-
 /* Como Funciona Flow (Slide 5) */
-#como-funciona-flow .section-header { /* Ensure the header (COMO FUNCIONA?) is centered if brand is removed */
-    justify-content: flex-start; /* Or 'center' if you want the title centered */
-    /* If you want the title fully centered after removing PRECIN |:
-    justify-content: center;
-    text-align: center; */
-}
-/* If the h2 itself needs to be centered because its parent is no longer space-between: */
-/* #como-funciona-flow .section-header h2 { margin: 0 auto; text-align: center; } */
-
-
 .flow-diagram {
     display: flex;
-    /* flex-direction: row; /* Default, for horizontal flow */
-    justify-content: center; /* Center the items if they don't fill the width */
-    align-items: center; /* Vertically align boxes and arrows */
-    flex-wrap: wrap; /* Allow items to wrap to the next line on smaller screens */
-    gap: 15px; /* Reduced gap slightly */
-    margin-bottom: 30px;
-    max-width: 1200px; /* Or adjust as needed */
-    width: 100%; /* Ensure it tries to use available width */
-}
-
-.flow-step {
-    display: flex; /* To help with internal alignment if needed, but mainly for consistency */
+    justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 30px;
+    max-width: 1200px;
 }
-
 .flow-box {
     background-color: var(--primary-green-light);
     color: var(--text-light);
-    padding: 15px 20px; /* Adjusted padding */
+    padding: 20px;
     border-radius: 10px;
     font-weight: 700;
-    
-    /* --- CHANGES FOR TEXT WRAPPING & BOX SIZE --- */
-    min-height: 50px; /* Ensure a minimum height for 2-3 lines */
-    height: auto;     /* Allow height to grow with content */
-    width: 220px;     /* <<<< SET A FIXED OR MAX-WIDTH FOR THE BOX */
-                      /* Adjust this width to encourage 2-3 lines of text.
-                         If text is still one line, make this narrower.
-                         If text is 4+ lines, make this wider. */
-    max-width: 250px; /* A max-width if using a percentage for width */
-    
-    /* white-space: normal; /* <<<< ENSURE TEXT CAN WRAP (default is normal, but good to be explicit) */
-    /* word-wrap: break-word; /* Allow breaking long words if necessary, not ideal for short phrases */
-    /* overflow-wrap: break-word; */
-    
-    display: flex; /* For centering text inside the box */
-    align-items: center;
-    justify-content: center;
-    text-align: center; /* Center the text lines */
-    font-size: 0.85em; /* Slightly smaller font if needed to fit text */
-    line-height: 1.4; /* Adjust for readability of multi-line text */
-    /* ------------------------------------------ */
+    min-width: 180px;
+    text-align: center;
+    font-size: 0.9em;
 }
-
-.flow-arrow { 
-    max-width: 35px; /* Slightly smaller arrow */
-    height: auto; /* Maintain aspect ratio */
-    align-self: center; /* Ensure arrows are centered with the boxes */
-}
-
-.flow-caption { 
-    max-width: 750px; 
-    margin: 20px auto; 
-    font-size: clamp(0.85rem, 1.7vw, 1rem); /* Slightly smaller caption */
-}
-
-/* Responsive adjustments for the flow diagram */
-@media (max-width: 992px) { /* Adjust breakpoint if needed */
-    .flow-diagram {
-        /* Keep flex-direction: row; and rely on flex-wrap for stacking,
-           or explicitly change to column if preferred for tablets */
-    }
-    .flow-box {
-        width: 200px; /* Adjust width for tablet */
-        font-size: 0.8em;
-    }
-}
-
-@media (max-width: 767px) { /* Mobile */
-    #como-funciona-flow .section-header {
-        justify-content: center; /* Center title on mobile */
-        text-align: center;
-    }
-     #como-funciona-flow .section-header h2 {
-        margin: 0 auto; /* Center title block */
-    }
-    .flow-diagram {
-        flex-direction: column; /* Stack steps vertically on mobile */
-        align-items: center; /* Center items when stacked */
-        gap: 15px;
-    }
-    .flow-arrow {
-        transform: rotate(90deg); /* Point arrows down */
-        margin: 5px 0; /* Adjust margin for vertical arrows */
-    }
-    .flow-box {
-        width: 80%; /* Make boxes wider on mobile since they stack */
-        max-width: 300px; /* But not too wide */
-        min-height: 40px;
-        padding: 12px 15px;
-        font-size: 0.85em;
-    }
-}
+.flow-arrow { max-width: 40px; }
+.flow-caption { max-width: 800px; margin: 20px auto; font-size: clamp(0.9rem, 1.8vw, 1rem); }
 
 /* Como Funciona Dashboard (Slide 6) */
 .content-left-right {
@@ -460,12 +299,12 @@ strong {
     text-align: left;
 }
 .content-text { flex: 1; }
-.content-text p { font-size: clamp(1rem, 2vw, 1.2rem); }
+.content-text p { font-size: clamp(1rem, 1.9vw, 1.1rem); }
 .content-image { flex: 1.5; }
 .dashboard-mockup { width: 100%; max-width: 600px; display: block; margin: 0 auto; }
 
 /* Por Que Investir (Slide 7) */
-#porque-investir h2 { text-align: center; margin-bottom: 40px; font-size: clamp(2.5rem, 5vw, 3.5rem); }
+#porque-investir h2 { text-align: center; margin-bottom: 40px; }
 .invest-reasons {
     display: flex;
     justify-content: space-around;
@@ -478,13 +317,14 @@ strong {
     color: var(--text-dark);
     padding: 30px;
     border-radius: 10px;
-    flex-basis: 300px; 
+    flex-basis: 300px;
     flex-grow: 1;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 .reason-card img { max-width: 60px; margin-bottom: 15px; }
 .reason-card h3 { font-size: 1.3em; margin-bottom: 10px; font-weight: 700;}
+.reason-card p { font-size: 0.95em; } /* Specific font size for card paragraph */
 
 /* Como Funciona Timeline (Slide 8) */
 .timeline-graphic { width: 100%; max-width: 1000px; margin-bottom: 15px; }
@@ -495,79 +335,46 @@ strong {
 .gradient-green-bg {
     background-image: linear-gradient(135deg, var(--primary-green-light), var(--primary-green));
 }
-.savings-intro { font-size: clamp(1.2rem, 2.5vw, 1.5rem); font-weight: 700; margin-bottom: 10px; }
-.savings-main { font-size: clamp(1.1rem, 2.2vw, 1.3rem); font-weight: 700; margin-bottom: 20px; }
+.savings-intro { font-size: clamp(1.1rem, 2.2vw, 1.4rem); font-weight: 700; margin-bottom: 10px; }
+.savings-main { font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 700; margin-bottom: 20px; }
 .savings-amount {
-    font-size: clamp(4rem, 10vw, 7rem);
+    font-size: clamp(3.5rem, 8vw, 6rem); /* Reduced from original very large size */
     font-weight: 900;
     line-height: 1;
     margin-bottom: 10px;
     color: var(--text-light);
     text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
 }
-.savings-period { font-size: clamp(1.2rem, 2.5vw, 1.5rem); font-weight: 700; margin-bottom: 30px; }
+.savings-period { font-size: clamp(1.1rem, 2.2vw, 1.4rem); font-weight: 700; margin-bottom: 30px; }
 .savings-logos img {
-    max-width: clamp(120px, 18vw, 180px);
+    max-width: clamp(110px, 16vw, 160px);
     margin: 0 15px;
 }
-/* .savings-logo-precin {} */ /* These don't need specific styles if general .savings-logos img is fine */
-/* .savings-logo-clubpetro {} */
-
 
 /* Implantação (Slide 10) */
-/* Assuming #implantacao also uses .split-section. We need specific styles if its splits are different */
-#implantacao .split-left-implantacao, 
-#implantacao .split-right-implantacao { /* More specific selectors if HTML structure uses these */
-    flex: 1; 
-    padding: 50px; 
-}
-#implantacao h3 { font-size: clamp(2rem, 4vw, 2.8rem); margin-bottom: 10px; }
+#implantacao .split-left-implantacao, #implantacao .split-right-implantacao { flex: 1; padding: 50px; }
 .evolution-logo { max-width: 150px; margin-bottom: 20px; }
 #implantacao ul { list-style: none; padding: 0; }
 #implantacao li {
-    font-size: clamp(0.9rem, 1.8vw, 1.1rem);
     margin-bottom: 15px;
     display: flex;
-    align-items: flex-start; 
+    align-items: flex-start;
 }
 #implantacao li img { width: 24px; margin-right: 10px; margin-top: 2px; }
-#implantacao .split-right-implantacao { 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center; 
-    text-align: center; 
-    position: relative; 
-}
-#implantacao .split-right-implantacao h4 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); margin-bottom: 20px; font-weight: 700; }
+#implantacao .split-right-implantacao { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; }
+#implantacao .split-right-implantacao h4 { font-size: clamp(1.1rem, 2.2vw, 1.4rem); margin-bottom: 20px; font-weight: 700; }
 .qr-mockup { width: 100%; max-width: 450px; }
 
 /* WhatsApp Info (Slide 12) */
-.gradient-green-split-bg {
-    background: var(--primary-green); 
-}
-/* Assuming #whatsapp-info uses .split-section */
-#whatsapp-info .split-left-whatsapp, 
-#whatsapp-info .split-right-whatsapp { 
-    flex: 1; 
-    padding: 50px; 
-    color: var(--text-light); 
-}
-#whatsapp-info .split-left-whatsapp { 
-    background-image: linear-gradient(to right, var(--gradient-green-top) , var(--primary-green)); 
-    display: flex; 
-    flex-direction: column; 
-}
-#whatsapp-info .split-right-whatsapp { 
-    background-color: var(--primary-green); 
-}
-
-#whatsapp-info h3 { font-size: clamp(2rem, 4vw, 2.5rem); margin-bottom: 20px; }
+.gradient-green-split-bg { background: var(--primary-green); }
+#whatsapp-info .split-left-whatsapp, #whatsapp-info .split-right-whatsapp { flex: 1; padding: 50px; color: var(--text-light); }
+#whatsapp-info .split-left-whatsapp { background-image: linear-gradient(to right, var(--gradient-green-top) , var(--primary-green)); display: flex; flex-direction: column; }
+#whatsapp-info .split-right-whatsapp { background-color: var(--primary-green); }
 .whatsapp-phones { width: 100%; max-width: 350px; display: block; margin: 20px auto; }
 .whatsapp-caption { font-size: 0.9em; text-align: center; margin-top: auto; }
 .whatsapp-feature { display: flex; align-items: flex-start; margin-bottom: 20px; }
 .whatsapp-feature .feature-star { width: 24px; margin-right: 15px; margin-top: 5px; }
-.whatsapp-feature p { font-size: clamp(0.9rem, 1.8vw, 1.1rem); margin: 0; }
+.whatsapp-feature p { font-size: clamp(0.9rem, 1.8vw, 1rem); margin: 0; }
 #whatsapp-info .logo-container-bottom img { filter: brightness(0) invert(1); }
 
 /* Relatório (Slide 13) */
@@ -581,25 +388,14 @@ strong {
     width: 100%;
     margin-bottom: 30px;
 }
-.relatorio-feature-item { display: flex; align-items: center; font-weight: 700; font-size: clamp(0.9rem, 1.8vw, 1rem); }
+.relatorio-feature-item { display: flex; align-items: center; font-weight: 700; font-size: clamp(0.85rem, 1.7vw, 1rem); }
 .relatorio-feature-item img { width: 20px; margin-right: 10px; }
 
-
 /* Valores (Slide 14) */
-/* Assuming #valores uses .split-section */
-#valores .split-left-valores, 
-#valores .split-right-valores { 
-    flex: 1; 
-    padding: 50px; 
-}
-#valores .split-left-valores { 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
-}
-#valores .split-left-valores h2 { font-size: clamp(2.2rem, 4.5vw, 3.2rem); margin-bottom: 30px; }
+#valores .split-left-valores, #valores .split-right-valores { flex: 1; padding: 50px; }
+#valores .split-left-valores { display: flex; flex-direction: column; justify-content: center; }
 .pricing-plan {
-    background-color: #f0f0f0; 
+    background-color: #f0f0f0;
     border-radius: 10px;
     padding: 25px;
     margin-bottom: 25px;
@@ -617,20 +413,15 @@ strong {
     font-size: 0.9em;
 }
 .plan-price-old { text-decoration: line-through; color: #777; font-size: 0.9em; }
-.plan-price-new { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; color: var(--primary-green); }
-
+.plan-price-new { font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 900; color: var(--primary-green); }
 #valores .split-right-valores {
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    position: relative;
-    background-image: url('img/valores-background-subtle-green.png'); 
+    display: flex; flex-direction: column; align-items: center; position: relative;
     background-size: cover;
     background-position: center;
 }
 .valores-clubpetro-logo { max-width: 150px; margin-bottom: 20px; align-self: flex-end; }
 .info-box {
-    background-color: var(--primary-green-light); 
+    background-color: var(--primary-green-light);
     color: var(--text-light);
     padding: 20px;
     border-radius: 10px;
@@ -642,118 +433,105 @@ strong {
 .info-box h4 { font-size: 1.2em; margin-bottom: 8px; font-weight: 700; }
 .info-box p { font-size: 0.95em; margin: 0; }
 .valores-person { max-width: 280px; margin-top: 20px; }
-/* .valores-logo-precin was removed from HTML, so commenting out */
-/* .valores-logo-precin { max-width: 150px; margin-top: auto; align-self: flex-start; } */
+.valores-logo-precin { max-width: 150px; margin-top: auto; align-self: flex-start; }
 
 /* Contato / Tally Form (Slide 15) */
 .contact-section {
     min-height: 80vh;
-    background-image: linear-gradient(to bottom, var(--primary-green-light), var(--primary-green)); 
+    background-image: linear-gradient(to bottom, var(--primary-green-light), var(--primary-green));
     background-size: cover;
     background-position: center;
 }
-.contact-section h2 { font-size: clamp(2.2rem, 4.5vw, 3.2rem); margin-bottom: 20px; }
-.contact-info { font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 700; margin-bottom: 30px; }
-.contact-info .phone-number { display: inline-flex; align-items: center; margin-left: 10px; }
-.contact-info .phone-number img { width: 20px; margin-right: 8px; }
+.contact-section .contact-info { font-size: clamp(1rem, 1.9vw, 1.1rem); font-weight: 700; margin-bottom: 30px; }
+.contact-section .contact-info .phone-number { display: inline-flex; align-items: center; margin-left: 10px; }
+.contact-section .contact-info .phone-number img { width: 20px; margin-right: 8px; }
 #tally-form-embed-container {
     width: 100%;
-    max-width: 600px; 
+    max-width: 600px;
     margin: 0 auto;
-    background-color: rgba(255,255,255, 0.1); 
+    background-color: rgba(255,255,255, 0.1);
     border-radius: 10px;
     padding: 15px;
 }
 #tally-form-embed-container iframe {
-    width: 100% !important; 
-    min-height: 450px; 
+    width: 100% !important;
+    min-height: 450px;
     border: none;
-    border-radius: 8px; 
+    border-radius: 8px;
 }
 
-
 /* Responsive Adjustments */
-@media (max-width: 992px) {
-    .split-section:not(.quem-somos-section) { /* Exclude quem-somos from this general mobile stacking if it has its own */
+@media (max-width: 992px) { /* Tablet and below */
+    .split-section {
         flex-direction: column;
     }
-    .split-section:not(.quem-somos-section) > div {
-        min-height: 50vh; /* Give some height when stacked */
+    .split-section > div {
+        min-height: auto; /* Allow sections to shrink more naturally */
+        padding: 40px 30px; /* Adjust padding for tablets */
     }
     .hero-vertical-text {
         font-size: clamp(4rem, 12vw, 8rem);
-        right: -30px;
+        right: -40px; /* Adjust for tablet */
     }
     .section-header { flex-direction: column; align-items: flex-start; }
     .header-brand { align-self: flex-start; margin-top: 5px; }
     .content-left-right { flex-direction: column; }
     .flow-diagram { flex-direction: column; align-items: center; }
     .flow-arrow { transform: rotate(90deg); margin: 10px 0; }
-    
-    /* More specific mobile for #implantacao if it uses .split-section */
-    #implantacao.split-section { flex-direction: column; }
-    #implantacao .split-left-implantacao, 
-    #implantacao .split-right-implantacao {
-        align-items: center; text-align: center; flex-basis: auto; width: 100%;
+    #implantacao .split-left-implantacao, #implantacao .split-right-implantacao {
+        align-items: center; text-align: center;
     }
-    #implantacao ul { text-align: left; }
-
-    /* More specific mobile for #whatsapp-info if it uses .split-section */
-    #whatsapp-info.split-section { flex-direction: column; }
-    #whatsapp-info .split-left-whatsapp, 
-    #whatsapp-info .split-right-whatsapp { 
-        text-align: center; flex-basis: auto; width: 100%;
-    }
-    #whatsapp-info .split-left-whatsapp { 
-        background-image: linear-gradient(to bottom, var(--gradient-green-top) , var(--primary-green)); 
-    }
+    #implantacao ul { text-align: left; display: inline-block; /* For better centering of list */ }
+    #whatsapp-info .split-left-whatsapp, #whatsapp-info .split-right-whatsapp { text-align: center; }
+    #whatsapp-info .split-left-whatsapp { background-image: linear-gradient(to bottom, var(--gradient-green-top) , var(--primary-green)); }
     .whatsapp-feature { flex-direction: column; align-items: center; text-align: center; }
     .whatsapp-feature .feature-star { margin-bottom: 10px; }
 }
 
-@media (max-width: 768px) {
-    section { padding: 40px 20px; }
-    /* General .split-section mobile stacking if not handled by more specific rules */
-    .split-section:not(.quem-somos-section):not(#implantacao):not(#whatsapp-info) { 
-        flex-direction: column;
-    }
-     .split-section:not(.quem-somos-section):not(#implantacao):not(#whatsapp-info) > div {
-        flex-basis: auto; width: 100%;
-    }
+@media (max-width: 767px) { /* Mobile phones */
+    section { padding: 30px 20px; } /* General padding for mobile */
 
-    .stats-person { max-width: 90%; }
-    .stats-phone-container { width: 150px; }
+    /* Hero specific adjustments for mobile if clamp isn't enough - these are examples */
+    /*
+    .hero-title-line1 {
+        font-size: 1.5rem;
+    }
+    .hero-title-line2 {
+        font-size: 2.8rem;
+        white-space: nowrap; 
+    }
+    .hero-star {
+        width: 2.5rem;
+    }
+    */
+    .stats-person { max-width: 80%; margin-bottom: -30px; }
+    .stats-phone-container { width: 140px; margin-top: -20px; }
     .invest-reasons { flex-direction: column; }
-    .reason-card { flex-basis: auto; }
-    .savings-logos img { max-width: 120px; margin: 0 10px; }
+    .reason-card { flex-basis: auto; padding: 20px; }
+    .savings-logos img { max-width: 100px; margin: 0 8px; }
     .relatorio-features { flex-direction: column; align-items: center; gap: 15px; }
     .relatorio-feature-item { text-align: center; }
+    .plan-price-new { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+}
 
-    /* Responsive adjustments for Quem Somos specifically */
-    .quem-somos-section {
-        flex-direction: column; /* Stack on mobile */
-        min-height: auto; /* Let content dictate height on mobile */
+@media (max-width: 480px) { /* Very small mobile phones */
+    .hero-title-line1 {
+        font-size: clamp(1.2rem, 3vw, 1.8rem); /* Further refine for very small screens */
     }
-    .quem-somos-section .split-left,
-    .quem-somos-section .split-right {
-        flex-basis: auto; /* Reset flex-basis */
-        width: 100%;
+    .hero-title-line2 {
+        font-size: clamp(2.5rem, 7vw, 4.5rem); /* Further refine */
+        white-space: nowrap;
     }
-    .quem-somos-section .split-left {
-        padding-bottom: 0; 
-        min-height: 300px; /* Or adjust based on person image aspect ratio */
-        /* justify-content: flex-start; /* If title needs to be at top on mobile */
+    .hero-star {
+        width: clamp(2.2rem, 6vw, 4rem); /* Further refine */
     }
-    .quemsomos-person {
-        position: relative; 
-        bottom: auto; /* Reset from absolute */
-        left: auto;   /* Reset from absolute */
-        transform: none; /* Reset from absolute */
-        margin: 20px auto 0 auto; /* Center with some top margin, no bottom margin if it sits on edge */
-        max-height: 250px; 
-        /* max-width: 70%; */ /* Control width on mobile if needed */
+    .btn-hero {
+        padding: 10px 25px;
+        font-size: 0.8rem;
     }
-    .quem-somos-section .split-right {
-        padding: 40px; /* Consistent padding for mobile text */
+    .section-header h2, #porque-investir h2, #relatorio .section-header h2, .contact-section h2,
+    .split-left h2, .split-left-valores h2, #implantacao .split-left-implantacao h3, #whatsapp-info .split-left-whatsapp h3 {
+        font-size: clamp(1.8rem, 4vw, 2.5rem); /* Smaller titles on very small screens */
     }
+    .stat-item h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
 }
